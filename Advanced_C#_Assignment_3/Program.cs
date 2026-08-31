@@ -1,4 +1,6 @@
 ﻿using System.Drawing;
+using System.Globalization;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -48,8 +50,44 @@ namespace Advanced_C__Assignment_3
             foreach (var i in studentGrade)
             {
                 gradestext.Add($"Grade: {i}");
+            }
+            #endregion
+
+            #region Exercise 2: Leaderboard
+            //Create a leaderboard that automatically sorts players by score.
+            //Add: 500 = "Ahmed", 200 = "Sara", 800 = "Ali", 350 = "Mona"
+
+            SortedDictionary<int, string> leaderboard = new()
+            {
+                [500] = "Ahmed",
+                [200] = "Sara",
+                [800] = "Ali",
+                [350] = "Mona"
+            };
+
+            //Print all entries(they should be sorted by score automatically)
+            foreach (var i in leaderboard)
+            {
+                Console.WriteLine(i);
+            }
+
+            //Access the first key and first value
+            Console.WriteLine(leaderboard[500]);
+
+            //Check if score 500 exists
+            Console.WriteLine(leaderboard.ContainsKey(500));
+
+            //Safely get the player with score 999
+            leaderboard.TryGetValue(999, out string? result);
+
+            //Remove the player with score 200 and print the updated list
+            leaderboard.Remove(200);
+            foreach (var i in leaderboard)
+            {
+                Console.WriteLine(i);
             } 
             #endregion
+
         }
     }
 }
