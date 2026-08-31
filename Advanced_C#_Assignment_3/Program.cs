@@ -1,7 +1,10 @@
-﻿using System.Drawing;
+﻿using Microsoft.VisualBasic;
+using System.Drawing;
 using System.Globalization;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Advanced_C__Assignment_3
@@ -85,7 +88,61 @@ namespace Advanced_C__Assignment_3
             foreach (var i in leaderboard)
             {
                 Console.WriteLine(i);
-            } 
+            }
+            #endregion
+
+            #region Exercise 3: Phone Book
+
+            // Build a phone book application.
+            // Create a Collection with 4 contacts(name → phone number)
+            Dictionary<string, string> phoneBook = new()
+            {
+                ["ali"] = "01012345848",
+                ["mohamed"] = "0105886587",
+                ["asker"] = "01098765e"
+            };
+
+
+            // Add a new contact using [] syntax (add or update)
+            phoneBook.Add("noor", "010434893");
+            phoneBook["ali"] = "85384658";
+            phoneBook["ahmed"] = "01038843";
+
+
+            // Try adding a duplicate using .Add() — catch the exception and print the error
+            try
+            {
+                phoneBook.Add("ali", "01056844793");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+
+            // Try adding a duplicate using .TryAdd() — print whether it succeeded
+            bool result = phoneBook.TryAdd("ali", "018738264873");
+            Console.WriteLine(result);
+
+
+            // Search for a contact that doesn’t exist
+            phoneBook.TryGetValue("mona", out string? name);
+            Console.WriteLine(name);
+
+
+
+            // Get a contact with a fallback of "Not Found"
+            Console.WriteLine($"{phoneBook.GetValueOrDefault("tyui") ?? "Not Found"}");
+
+
+            // Print all Keys on one line, then all Values on another line
+            foreach (var key in phoneBook.Keys)
+                Console.Write($"{key} ");
+
+            Console.Write("\n");
+
+            foreach (var value in phoneBook.Values)
+                Console.Write($"{value} "); 
             #endregion
 
         }
