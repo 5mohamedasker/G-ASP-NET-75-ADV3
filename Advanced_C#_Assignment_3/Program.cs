@@ -6,7 +6,9 @@ using System.Drawing;
 using System.Globalization;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics.Arm;
 using System.Runtime.Intrinsics.X86;
+using System.Timers;
 using System.Xml;
 using System.Xml.Linq;
 using static System.Net.Mime.MediaTypeNames;
@@ -237,8 +239,40 @@ namespace Advanced_C__Assignment_3
 
             #endregion
 
+            #region Exercise 6: Browser History (Undo)
+
+            // Simulate browser back / forward
+            // Create a Stack<string> for browser history
+            Stack<string> browserHistory = [];
+
+            // Push 5 URLs: "google.com", "github.com", "stackoverflow.com", "youtube.com", "claude.ai"
+            browserHistory.Push("google.com");
+            browserHistory.Push("github.com");
+            browserHistory.Push("stackoverflow.com");
+            browserHistory.Push("youtube.com");
+            browserHistory.Push("claude.ai");
 
 
+
+            // Use Peek to see the current page(top of stack)
+            Console.WriteLine(browserHistory.Peek());
+
+            // Press "back" 3 times using Pop — print each page you leave
+            Console.WriteLine(browserHistory.Pop());
+            Console.WriteLine(browserHistory.Pop());
+            Console.WriteLine(browserHistory.Pop());
+
+            // Print the current page after going back
+            Console.WriteLine(browserHistory.Peek());
+
+            // Try TryPop on an empty stack — what happens? it will return false 
+            browserHistory.Pop();
+            browserHistory.Pop();
+
+            Console.WriteLine(browserHistory.TryPop(out string result));
+            Console.WriteLine(result);
+
+            #endregion
         }
     }
 }
