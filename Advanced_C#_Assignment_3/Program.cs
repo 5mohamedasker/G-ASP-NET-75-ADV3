@@ -1,9 +1,12 @@
 ﻿using Microsoft.VisualBasic;
+using System.Collections;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics.X86;
 using System.Xml;
 using System.Xml.Linq;
 using static System.Net.Mime.MediaTypeNames;
@@ -198,6 +201,44 @@ namespace Advanced_C__Assignment_3
             Console.WriteLine($" {setA.IsProperSubsetOf(new int[] { 1, 2 })} ");
 
             #endregion
+
+            #region Exercise 5: Print Queue Simulator
+
+            // Simulate a printer queue
+            // Create a Queue<string> and enqueue 5 documents: "Report.pdf", "Invoice.pdf", "Letter.docx", "Resume.pdf", "Photo.jpg"
+
+            Queue<string> simulatePrinter = [];
+
+            simulatePrinter.Enqueue("Report.pdf");
+            simulatePrinter.Enqueue("Invoice.pdf");
+            simulatePrinter.Enqueue("Letter.docx");
+            simulatePrinter.Enqueue("Resume.pdf");
+            simulatePrinter.Enqueue("Photo.jpg");
+
+
+            // Print the queue contents and Count
+            foreach (var printer in simulatePrinter)
+                Console.Write(printer + "   ");
+            Console.WriteLine("\n" + simulatePrinter.Count);
+
+            // Use Peek to see which document will print next(without removing)
+            Console.WriteLine(simulatePrinter.Peek());
+
+
+            // Process the queue: Dequeue each document and print "Printing: [name]"
+            int count = simulatePrinter.Count;
+            for (int i = 0; i < count; i++)
+            {
+                Console.WriteLine($"Printing: [{simulatePrinter.Dequeue()}]");
+            }
+            // Try TryDequeue on the now - empty queue — what happens? it will return false
+            Console.WriteLine(simulatePrinter.TryDequeue(out string result));
+            Console.WriteLine(result);
+
+            #endregion
+
+
+
         }
     }
 }
