@@ -1,8 +1,10 @@
 ﻿using Microsoft.VisualBasic;
+using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.Globalization;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using System.Xml;
 using System.Xml.Linq;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -142,9 +144,60 @@ namespace Advanced_C__Assignment_3
             Console.Write("\n");
 
             foreach (var value in phoneBook.Values)
-                Console.Write($"{value} "); 
+                Console.Write($"{value} ");
             #endregion
 
+            #region Exercise 4: Unique Email Validator
+
+
+            // Use Collection to manage unique email addresses.
+            // Create a HashSet<string> with a case -insensitive comparer: new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            HashSet<string> emailsValidator = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+
+            // Add these emails: "ahmed@test.com", "AHMED@test.com", "sara@test.com", "Sara@Test.Com"
+            emailsValidator.Add("ahmed@test.com");
+            emailsValidator.Add("AHMED@test.com");
+            emailsValidator.Add("sara@test.com");
+            emailsValidator.Add("Sara@Test.Com");
+
+
+            // Print Count — how many are actually stored? Explain why.
+            Console.WriteLine(emailsValidator.Count);// 2
+            // Because we ignored the difference between capital and lowercase letters,
+            // they are considered the same.
+
+
+            // Create two sets: Set A = { 1, 2, 3, 4, 5 } and Set B = { 4,5,6,7,8}
+            HashSet<int> setA = new() { 1, 2, 3, 4, 5 };
+            HashSet<int> setB = new() { 4, 5, 6, 7, 8 };
+
+            // Print the result of: UnionWith, IntersectWith, ExceptWith
+            //UnionWith
+            setA.UnionWith(setB);
+            foreach (int i in setA)
+                Console.Write(i + " ");
+            Console.WriteLine("");
+
+
+            //IntersectWith    
+            setA.IntersectWith(setB);
+            foreach (int i in setA)
+                Console.Write(i + " ");
+
+            Console.WriteLine();
+
+            //ExceptWith
+            setA.ExceptWith(setB);
+            foreach (int i in setA)
+                Console.Write(i + " ");
+
+
+
+            // Use IsSubsetOf to check if { 1,2} is a subset of Set A
+            Console.WriteLine($" {setA.IsProperSubsetOf(new int[] { 1, 2 })} ");
+
+            #endregion
         }
     }
 }
